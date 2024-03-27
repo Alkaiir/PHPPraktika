@@ -1,1 +1,5 @@
 10.30.8.76 - - [27/Mar/2024:00:01:32 -0700] "GET /123 HTTP/1.1" 200 210 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.1023 YaBrowser/23.9.1.1023 (corp) Yowser/2.5 Safari/537.36"
+10.30.8.76 - - [27/Mar/2024:00:07:53 -0700] "GET /123 HTTP/1.1" 200 556 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.1023 YaBrowser/23.9.1.1023 (corp) Yowser/2.5 Safari/537.36"
+10.30.8.76 - - [27/Mar/2024:00:07:58 -0700] "GET /go HTTP/1.1" 200 217 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.1023 YaBrowser/23.9.1.1023 (corp) Yowser/2.5 Safari/537.36"
+10.30.8.76 - - [27/Mar/2024:00:08:04 -0700] "GET /hello HTTP/1.1" 200 217 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.1023 YaBrowser/23.9.1.1023 (corp) Yowser/2.5 Safari/537.36"
+10.30.8.76 - - [27/Mar/2024:00:08:07 -0700] "GET /go HTTP/1.1" 200 216 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.1023 YaBrowser/23.9.1.1023 (corp) Yowser/2.5 Safari/537.36"
