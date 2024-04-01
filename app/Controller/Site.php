@@ -2,7 +2,9 @@
 
 namespace Controller;
 
+use Model\Bookinstance;
 use Model\Post;
+use Model\Reader;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -15,7 +17,20 @@ class Site
 
     public function index(): string
     {
-        return new View('site.hello', ['message' => 'Site working']);
+        $users = User::all();
+
+        $bookinstances = Bookinstance::all();
+
+        $readers = Reader::all();
+
+
+
+        if (app()->auth::checkAdmin()):
+            return new View('site.adminMain', ['users' => $users]);
+        else :
+            return new View('site.librarianMain', ['bookinstances' => $bookinstances, 'readers' => $readers]);
+        endif;
+
     }
 
 
@@ -45,6 +60,14 @@ class Site
     {
         Auth::logout();
         app()->route->redirect('/');
+    }
+
+    public function addlibrarian(): string
+    {
+        if ($request->method === 'POST' && User::create($request->all())) {
+            app()->route->redirect('/');
+        }
+        return new View('site.addLibrarianForm', ['message' => 'Добавление библиотекаря']);
     }
 
 }

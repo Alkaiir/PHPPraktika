@@ -30,6 +30,7 @@
         display: flex;
         gap: 20px;
         align-items: center;
+        justify-content: space-between;
     }
 
     a {
@@ -48,15 +49,21 @@ if (app()->auth::check()):
 ?>
 <header>
     <nav>
+        <?php
+        if (app()->auth::checkAdmin()):
+        ?>
         <a href="<?= app()->route->getUrl('/') ?>">Главная</a>
+        <a href="<?= app()->route->getUrl('/addlibrarian') ?>">Добавить библиотекаря</a>
+        <a href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
         <?php
-        if (!app()->auth::check()):
-            ?>
-            <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-        <?php
-        else:
-            ?>
-            <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
+        else :
+        ?>
+        <a href="<?= app()->route->getUrl('/') ?>">Главная</a>
+        <a href="<?= app()->route->getUrl('/') ?>">Добавить читателя</a>
+        <a href="<?= app()->route->getUrl('/') ?>">Все читатели</a>
+        <a href="<?= app()->route->getUrl('/') ?>">Все книги</a>
+        <a href="<?= app()->route->getUrl('/') ?>">Популярные книги</a>
+        <a href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
         <?php
         endif;
         ?>

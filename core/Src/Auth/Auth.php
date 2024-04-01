@@ -58,4 +58,10 @@ class Auth
         return true;
     }
 
+    public static function checkAdmin(): bool
+    {
+        $user = self::user();
+        return $user && $user->role === 2;
+    }
+
 }
