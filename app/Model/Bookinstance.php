@@ -11,9 +11,12 @@ class Bookinstance extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'reader_ticket_id',
+        'bookinstance_id',
         'book_name',
         'pick_date',
-        'return_date'
+        'return_date',
+        'in_stock',
+        'reader_ticket_id'
+
     ];
 }

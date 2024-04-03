@@ -62,7 +62,7 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function addlibrarian(): string
+    public function addlibrarian(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
             app()->route->redirect('/');
@@ -70,7 +70,7 @@ class Site
         return new View('site.addLibrarianForm', ['message' => 'Добавление библиотекаря']);
     }
 
-    public function addReader(): string
+    public function addReader(Request $request): string
     {
         if ($request->method === 'POST' && Reader::create($request->all())) {
             app()->route->redirect('/');
@@ -78,15 +78,15 @@ class Site
         return new View('site.addReaderForm', ['message' => 'Добавление читателя']);
     }
 
-    public function addBook(): string
+    public function addBook(Request $request): string
     {
         if ($request->method === 'POST' && Book::create($request->all())) {
             app()->route->redirect('/');
         }
-        return new View('site.addBookForm', ['message' => 'Добавление книги']);
+        return new View('site.add_book', ['message' => 'Добавление книги']);
     }
 
-    public function addBookInstance(): string
+    public function addBookInstance(Request $request): string
     {
         $readers = Reader::all();
         $books = Book::all();
@@ -94,7 +94,7 @@ class Site
         if ($request->method === 'POST' && Bookinstance::create($request->all())) {
             app()->route->redirect('/');
         }
-        return new View('site.addBookInstanceForm', ['message' => 'Выдача книги', 'books' => $books, 'readers' => $readers]);
+        return new View('site.add_bookinstance', ['message' => 'Выдача книги', 'books' => $books, 'readers' => $readers]);
     }
 
     public function allReaders(): string
@@ -124,7 +124,7 @@ class Site
             if ($book->instances_count > 0) {
                 array_push($populars, $book);
             }
-            asort($populars);
+            sort($populars);
         }
 
 

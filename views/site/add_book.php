@@ -65,7 +65,7 @@
     <input type="text" name="publication_year" placeholder="Год публикации">
     <input type="number" name="price" placeholder="Цена">
     <div class="checkbox-container">
-        <input type="checkbox" name="new_publication" class="checkbox">
+        <input type="checkbox" name="new_publication" class="checkbox" value="1">
         <label for="new_publication">Новая ли публикация</label>
     </div>
     <input type="text" name="annotation" placeholder="Анотация">
