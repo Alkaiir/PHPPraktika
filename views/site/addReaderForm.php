@@ -47,21 +47,24 @@
 
 </style>
 
+
 <?php
-if (app()->auth::checkAdmin()):
-?>
-<form method="post" class="form">
-    <h2><?= $message ?? ''; ?></h2>
-    <input type="text" name="login" placeholder="Логин">
-    <input type="email" name="email" placeholder="Почта">
-    <input type="password" name="password" placeholder="Пароль">
-    <button>Добавить</button>
-</form>
+if (!app()->auth::checkAdmin()):
+    ?>
+    <form method="post" class="form">
+        <h2><?= $message ?? ''; ?></h2>
+        <input type="text" name="name" placeholder="Имя">
+        <input type="text" name="surname" placeholder="Фамилия">
+        <input type="text" name="patronymic" placeholder="Отчество">
+        <input type="text" name="adress" placeholder="Адрес">
+        <input type="tel" name="phone" placeholder="Телефон">
+        <button>Добавить</button>
+    </form>
 <?php
 else:
-?>
-<h2>Вы не являетесь администратором</h2>
-<a href="<?= app()->route->getUrl('/') ?>">Назад</a>
+    ?>
+    <h2>Вы не являетесь библиотекарем</h2>
+    <a href="<?= app()->route->getUrl('/') ?>">Назад</a>
 <?php
 endif;
 ?>

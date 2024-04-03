@@ -3,7 +3,7 @@
 namespace Controller;
 
 use Model\Bookinstance;
-use Model\Post;
+use Model\Book;
 use Model\Reader;
 use Src\View;
 use Src\Request;
@@ -69,5 +69,50 @@ class Site
         }
         return new View('site.addLibrarianForm', ['message' => 'Добавление библиотекаря']);
     }
+
+    public function addReader(): string
+    {
+        if ($request->method === 'POST' && User::create($request->all())) {
+            app()->route->redirect('/');
+        }
+        return new View('site.addReaderForm', ['message' => 'Добавление читателя']);
+    }
+
+    public function allReaders(): string
+    {
+        $readers = Reader::all();
+
+        return new View('site.allReaders', ['readers' => $readers]);
+    }
+
+    public function allBooks(): string
+    {
+        $books = Book::all();
+
+        return new View('site.allBooks', ['books' => $books]);
+    }
+
+    public function popular(): string
+    {
+
+        $populars = [];
+        $books = Book::all();
+        foreach ($books as $book) {
+
+            if ($book->instances_count > 0) {
+                array_push($populars, $book);
+            }
+            asort($populars);
+        }
+
+
+        return new View('site.popular', ['populars' => $populars]);
+    }
+
+    public function errorPage(): string
+    {
+        return new View('site.errorPage');
+    }
+
 
 }

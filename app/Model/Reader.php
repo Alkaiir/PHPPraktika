@@ -11,11 +11,11 @@ class Reader extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'reader_ticket_id',
         'name',
         'surname',
-        'patronymic'
-
+        'patronymic',
+        'adress',
+        'phone'
     ];
 
 }

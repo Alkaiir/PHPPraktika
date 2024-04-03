@@ -60,8 +60,18 @@ class Auth
 
     public static function checkAdmin(): bool
     {
-        $user = self::user();
-        return $user && $user->role === 2;
+        if(self::$user->getRole() == 2){
+            return true;
+        }
+        return false;
+    }
+
+    public static function checkLibrarian(): bool
+    {
+        if(self::$user->getRole() == 1){
+            return true;
+        }
+        return false;
     }
 
 }

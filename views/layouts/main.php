@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-    <title>Pop it MVC</title>
+    <title>Library</title>
 </head>
 
 <style>
@@ -40,6 +40,12 @@
 
     }
 
+    .role {
+        position: fixed;
+        bottom: 5px;
+        left: 5px;
+    }
+
 
 </style>
 
@@ -59,10 +65,12 @@ if (app()->auth::check()):
         else :
         ?>
         <a href="<?= app()->route->getUrl('/') ?>">Главная</a>
-        <a href="<?= app()->route->getUrl('/') ?>">Добавить читателя</a>
-        <a href="<?= app()->route->getUrl('/') ?>">Все читатели</a>
-        <a href="<?= app()->route->getUrl('/') ?>">Все книги</a>
-        <a href="<?= app()->route->getUrl('/') ?>">Популярные книги</a>
+        <a href="<?= app()->route->getUrl('/addreader') ?>">Добавить читателя</a>
+        <a href="<?= app()->route->getUrl('/addreader') ?>">Добавить книгу</a>
+        <a href="<?= app()->route->getUrl('/addreader') ?>">Выдать книгу</a>
+        <a href="<?= app()->route->getUrl('/allreaders') ?>">Все читатели</a>
+        <a href="<?= app()->route->getUrl('/allbooks') ?>">Все книги</a>
+        <a href="<?= app()->route->getUrl('/popular') ?>">Популярные книги</a>
         <a href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
         <?php
         endif;
@@ -76,6 +84,18 @@ endif;
 <main>
     <?= $content ?? '' ?>
 </main>
+
+    <?php
+    if (app()->auth::checkAdmin()):
+        ?>
+        <p class="role">Роль: Администратор</p>
+    <?php
+    else :
+        ?>
+        <p class="role">Роль: Библиотекарь</p>
+    <?php
+    endif;
+    ?>
 
 </body>
 </html>

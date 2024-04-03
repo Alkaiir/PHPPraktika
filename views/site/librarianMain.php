@@ -23,7 +23,7 @@
 
 </style>
 
-<h2 class="pageTitle">Список пользователей</h2>
+<h2 class="pageTitle">Список взятых книг</h2>
 
 <div class="infoBlock">
     <?php
@@ -37,7 +37,16 @@
                 <li><?= $bookinstance->book_name?></li>
                 <li><?= $bookinstance->pick_date?></li>
                 <li><?= $bookinstance->return_date?></li>
-                    <li><?= $readers?></li>
+                <?php
+                foreach ($readers as $reader) {
+                    if ($reader->reader_ticket_id === $bookinstance->reader_ticket_id) {
+                        ?>
+                        <li><?= $reader->name?></li>
+                        <?php
+
+                    }
+                }
+                ?>
             </ul>
         </div>
         <?php
