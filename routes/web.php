@@ -11,4 +11,6 @@ Route::add(['GET', 'POST'], '/addreader', [Controller\Site::class, 'addReader'])
 Route::add(['GET', 'POST'], '/allbooks', [Controller\Site::class, 'allBooks'])->middleware('auth', 'librarian');
 Route::add(['GET', 'POST'], '/allreaders', [Controller\Site::class, 'allReaders'])->middleware('auth', 'librarian');
 Route::add(['GET', 'POST'], '/popular', [Controller\Site::class, 'popular'])->middleware('auth', 'librarian');
+Route::add(['GET', 'POST'], '/addbook', [Controller\Site::class, 'addBook'])->middleware('auth', 'librarian');
+Route::add(['GET', 'POST'], '/addbookinstance', [Controller\Site::class, 'addBookInstance'])->middleware('auth', 'librarian');
 Route::add(['GET', 'POST'], '/errorpage', [Controller\Site::class, 'errorPage']);

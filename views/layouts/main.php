@@ -66,8 +66,8 @@ if (app()->auth::check()):
         ?>
         <a href="<?= app()->route->getUrl('/') ?>">Главная</a>
         <a href="<?= app()->route->getUrl('/addreader') ?>">Добавить читателя</a>
-        <a href="<?= app()->route->getUrl('/addreader') ?>">Добавить книгу</a>
-        <a href="<?= app()->route->getUrl('/addreader') ?>">Выдать книгу</a>
+        <a href="<?= app()->route->getUrl('/addbook') ?>">Добавить книгу</a>
+        <a href="<?= app()->route->getUrl('/addbookinstance') ?>">Выдать книгу</a>
         <a href="<?= app()->route->getUrl('/allreaders') ?>">Все читатели</a>
         <a href="<?= app()->route->getUrl('/allbooks') ?>">Все книги</a>
         <a href="<?= app()->route->getUrl('/popular') ?>">Популярные книги</a>

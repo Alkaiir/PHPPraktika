@@ -31,6 +31,9 @@
         padding: 2px;
     }
 
+    .hidden {
+        display: none;
+    }
 
 </style>
 
@@ -50,9 +53,43 @@
                 <li><?= $reader->patronymic?></li>
             </ul>
 
-            <a href="#" class="infoItemLink"> Подробнее </a>
+            <a href="#" class="infoItemLink" id="btn-reader-<?=$reader->reader_ticket_id?>" onclick="expandDesc('reader-<?=$reader->reader_ticket_id?>', 'btn-reader-<?=$reader->reader_ticket_id?>')"> Подробнее </a>
+
+            <div class="infoItemAddition hidden" id="reader-<?=$reader->reader_ticket_id?>">
+                <ul>
+                    <li><?= $reader->adress?></li>
+                    <li><?= $reader->phone?></li>
+                    <li>Взятые книги:</li>
+                    <?php
+                    foreach ($bookinstances as $bookinstance) {
+                        if ($bookinstance->reader_ticket_id === $reader->reader_ticket_id) {
+                            ?>
+                            <li>============================</li>
+                            <li><?=$bookinstance->book_name?></li>
+                            <li><?=$bookinstance->pick_date?></li>
+                            <li><?=$bookinstance->return_date?></li>
+                            <?php
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+
         </div>
         <?php
     }
     ?>
 </div>
+<script>
+    function expandDesc (id, btnID) {
+        let infoItemLink = document.getElementById(btnID);
+        let infoItemAddition = document.getElementById(id);
+        if (infoItemAddition.hasAttribute("class", "hidden")){
+            infoItemAddition.removeAttribute("class", "hidden");
+            infoItemLink.innerHTML = "Скрыть";
+        } else {
+            infoItemAddition.setAttribute("class", "hidden");
+            infoItemLink.innerHTML = "Подробнее";
+        }
+    }
+</script>

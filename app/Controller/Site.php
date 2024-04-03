@@ -72,24 +72,46 @@ class Site
 
     public function addReader(): string
     {
-        if ($request->method === 'POST' && User::create($request->all())) {
+        if ($request->method === 'POST' && Reader::create($request->all())) {
             app()->route->redirect('/');
         }
         return new View('site.addReaderForm', ['message' => 'Добавление читателя']);
     }
 
+    public function addBook(): string
+    {
+        if ($request->method === 'POST' && Book::create($request->all())) {
+            app()->route->redirect('/');
+        }
+        return new View('site.addBookForm', ['message' => 'Добавление книги']);
+    }
+
+    public function addBookInstance(): string
+    {
+        $readers = Reader::all();
+        $books = Book::all();
+
+        if ($request->method === 'POST' && Bookinstance::create($request->all())) {
+            app()->route->redirect('/');
+        }
+        return new View('site.addBookInstanceForm', ['message' => 'Выдача книги', 'books' => $books, 'readers' => $readers]);
+    }
+
     public function allReaders(): string
     {
         $readers = Reader::all();
+        $bookinstances = Bookinstance::all();
 
-        return new View('site.allReaders', ['readers' => $readers]);
+        return new View('site.allReaders', ['readers' => $readers, 'bookinstances' => $bookinstances] );
     }
 
     public function allBooks(): string
     {
         $books = Book::all();
+        $bookinstances = Bookinstance::all();
+        $readers = Reader::all();
 
-        return new View('site.allBooks', ['books' => $books]);
+        return new View('site.allBooks', ['books' => $books, 'bookinstances' => $bookinstances, 'readers' => $readers]);
     }
 
     public function popular(): string
