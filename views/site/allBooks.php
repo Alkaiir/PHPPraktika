@@ -47,17 +47,17 @@
         ?>
         <div class="infoItem">
             <ul>
-                <li><?= $book->book_name?></li>
-                <li><?= $book->annotation?></li>
-                <li><?= $book->author?></li>
+                <li>Название: <?= $book->book_name?></li>
+                <li>Анотация: <?= $book->annotation?></li>
+                <li>Автор: <?= $book->author?></li>
             </ul>
 
             <a href="#" class="infoItemLink" id="btn-book-<?=$book->book_name?>" onclick="expandDesc('book-<?=$book->book_name?>', 'btn-book-<?=$book->book_name?>')"> Подробнее </a>
 
             <div class="infoItemAddition hidden" id="book-<?=$book->book_name?>">
                 <ul>
-                    <li><?= $book->publication_year?></li>
-                    <li><?= $book->price?></li>
+                    <li>Год издания: <?= $book->publication_year?></li>
+                    <li>Цена: <?= $book->price?></li>
                     <li>Читатели взявшие книгу:</li>
                     <?php
                     foreach ($bookinstances as $bookinstance) {

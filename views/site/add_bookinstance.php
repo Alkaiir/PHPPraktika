@@ -51,6 +51,7 @@
 
 <form method="post" class="form">
     <h2><?= $message ?? ''; ?></h2>
+    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <select type="text" name="book_name" placeholder="Название книги">
         <?php
         foreach ($books as $book) {

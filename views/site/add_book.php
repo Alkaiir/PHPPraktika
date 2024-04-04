@@ -61,6 +61,7 @@
 
 <form method="post" class="form">
     <h2><?= $message ?? ''; ?></h2>
+    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <input type="text" name="book_name" placeholder="Название книги">
     <input type="text" name="publication_year" placeholder="Год публикации">
     <input type="number" name="price" placeholder="Цена">

@@ -16,6 +16,7 @@ class Book extends Model
         'annotation',
         'price',
         'publication_year',
-        'new_publication'
+        'new_publication',
+        'instances_count'
     ];
 }

@@ -27,15 +27,14 @@
 
 <div class="infoBlock">
     <?php
-
-    foreach ($populars as $book) {
+    foreach ($populars as $popular) {
         ?>
         <div class="infoItem">
             <ul>
-                <li><?= $book->book_name?></li>
-                <li><?= $book->annotation?></li>
-                <li><?= $book->author?></li>
-                <li>Взято копий: <?= $book->instances_count?></li>
+                <li><?= $popular->book_name?></li>
+                <li><?= $popular->annotation?></li>
+                <li><?= $popular->author?></li>
+                <li>Взято копий: <?= $popular->instances_count?></li>
             </ul>
         </div>
         <?php

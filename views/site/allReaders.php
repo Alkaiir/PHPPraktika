@@ -46,21 +46,23 @@
 
 <div class="infoBlock">
     <?php
-
-
     foreach ($readers as $reader) {
         ?>
         <div class="infoItem">
             <ul>
                 <?php
-                if(!empty($reader->image)):
-                    echo '<li><img class="readerPhoto" src="public/img/'.$reader->image.'"></li>';
+                if(!empty($reader->image)) :
+                    echo '<li><img class="readerPhoto" src="public/img/' . $reader->image . '"></li>';
                 endif;
                 ?>
                 <li><?= $reader->reader_ticket_id?></li>
-                <li><?= $reader->name?></li>
                 <li><?= $reader->surname?></li>
-                <li><?= $reader->patronymic?></li>
+                <li><?= $reader->name?></li>
+                <?php
+                if(!empty($reader->patronymic)) :
+                    echo '<li> '.$reader->patronymic . '</li>';
+                endif;
+                ?>
             </ul>
 
             <a href="#" class="infoItemLink" id="btn-reader-<?=$reader->reader_ticket_id?>" onclick="expandDesc('reader-<?=$reader->reader_ticket_id?>', 'btn-reader-<?=$reader->reader_ticket_id?>')"> Подробнее </a>
@@ -79,14 +81,13 @@
                             <li><?=$bookinstance->pick_date?></li>
                             <li><?=$bookinstance->return_date?></li>
                             <?php
-                        }
+                        };
                     }
                     ?>
                 </ul>
             </div>
-
         </div>
-        <?php
+    <?php
     }
     ?>
 </div>

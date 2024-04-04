@@ -15,7 +15,7 @@ use Src\Validator\Validator;
 class Site
 {
 
-    public function index(): string
+    public function index(Request $request): string
     {
         $users = User::all();
 
@@ -28,6 +28,14 @@ class Site
         if (app()->auth::checkAdmin()):
             return new View('site.adminMain', ['users' => $users]);
         else :
+
+            if ($request->method === 'POST') {
+                $bookinstance_id = $request->all()['bookinstance_id'];
+                $bookinstance_for_update = Bookinstance::where('bookinstance_id', $bookinstance_id);
+                $bookinstance_for_update->update(['in_stock' => 1]);
+                app()->route->redirect('/');
+            }
+
             return new View('site.librarianMain', ['bookinstances' => $bookinstances, 'readers' => $readers]);
         endif;
 
@@ -115,24 +123,23 @@ class Site
 
                 $path = $_SERVER['DOCUMENT_ROOT'] . $root . '/public/img/';
 
-                var_dump($path);
-
                 $name = mt_rand(0, 10000) . '_' . $image['name'];
 
-                var_dump($name);
+                $tmp_name = $image['tmp_name'];
 
-                move_uploaded_file($image['tmp_name'], $path . $name);
+                move_uploaded_file($tmp_name, $path . $name);
 
                 $reader_data = $request->all();
+
                 $reader_data['image'] = $name;
 
                 if (Reader::create($reader_data)) {
-//                    app()->route->redirect('/');
+                    app()->route->redirect('/');
                 }
 
             } else {
                 if (Reader::create($request->all())) {
-//                    app()->route->redirect('/');
+                    app()->route->redirect('/');
                 }
             }
 
@@ -154,9 +161,29 @@ class Site
         $readers = Reader::all();
         $books = Book::all();
 
-        if ($request->method === 'POST' && Bookinstance::create($request->all())) {
-            app()->route->redirect('/');
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'pick_date' => ['required'],
+                'return_date' => ['required'],
+            ], [
+                'required' => 'Поле :field пусто'
+            ]);
+
+            if($validator->fails()){
+                return new View('site.add_bookinstance',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
+            if (Bookinstance::create($request->all())) {
+                $selected_book = Book::where('book_name', $request->all()['book_name']);
+                $selected_book->increment('instances_count');
+                app()->route->redirect('/');
+            }
+
+
         }
+
         return new View('site.add_bookinstance', ['message' => 'Выдача книги', 'books' => $books, 'readers' => $readers]);
     }
 
@@ -180,16 +207,7 @@ class Site
     public function popular(): string
     {
 
-        $populars = [];
-        $books = Book::all();
-        foreach ($books as $book) {
-
-            if ($book->instances_count > 0) {
-                array_push($populars, $book);
-            }
-            sort($populars);
-        }
-
+        $populars = Book::orderBy('instances_count', 'desc')->get();
 
         return new View('site.popular', ['populars' => $populars]);
     }
