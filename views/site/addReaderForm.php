@@ -33,6 +33,7 @@
         border-radius: 15px;
         border: none;
         font-size: 24px;
+        background: white;
     }
 
     button {
@@ -51,13 +52,15 @@
 <?php
 if (!app()->auth::checkAdmin()):
     ?>
-    <form method="post" class="form">
+    <form method="post" class="form" enctype="multipart/form-data">
         <h2><?= $message ?? ''; ?></h2>
+        <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <input type="text" name="name" placeholder="Имя">
         <input type="text" name="surname" placeholder="Фамилия">
         <input type="text" name="patronymic" placeholder="Отчество">
         <input type="text" name="adress" placeholder="Адрес">
         <input type="tel" name="phone" placeholder="Телефон">
+        <input type="file" name="image" accept=".png, .jpg">
         <button>Добавить</button>
     </form>
 <?php

@@ -15,7 +15,8 @@ class Reader extends Model
         'surname',
         'patronymic',
         'adress',
-        'phone'
+        'phone',
+        'image'
     ];
 
 }

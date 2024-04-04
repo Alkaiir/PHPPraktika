@@ -5,5 +5,6 @@
     <label>Почта <input type="email" name="email"></label>
     <label>Пароль <input type="password" name="password"></label>
     <label>Роль <input type="number" name="role"></label>
+    <input type="image">
     <button>Зарегистрироваться</button>
 </form>

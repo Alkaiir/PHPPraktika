@@ -35,6 +35,11 @@
         display: none;
     }
 
+    .readerPhoto {
+        width: 200px;
+
+    }
+
 </style>
 
 <h2 class="pageTitle">Список всех читателей</h2>
@@ -47,6 +52,11 @@
         ?>
         <div class="infoItem">
             <ul>
+                <?php
+                if(!empty($reader->image)):
+                    echo '<li><img class="readerPhoto" src="public/img/'.$reader->image.'"></li>';
+                endif;
+                ?>
                 <li><?= $reader->reader_ticket_id?></li>
                 <li><?= $reader->name?></li>
                 <li><?= $reader->surname?></li>

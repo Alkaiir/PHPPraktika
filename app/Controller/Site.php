@@ -90,10 +90,55 @@ class Site
 
     public function addReader(Request $request): string
     {
-        if ($request->method === 'POST' && Reader::create($request->all())) {
-            app()->route->redirect('/');
-        }
-        return new View('site.addReaderForm', ['message' => 'Добавление читателя']);
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'name' => ['required'],
+                'surname' => ['required'],
+                'adress' => ['required'],
+                'phone' => ['required'],
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально'
+            ]);
+
+            if ($validator->fails()) {
+                return new View('site.addReaderForm',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
+            if ($_FILES['image']) {
+
+                $image = $_FILES['image'];
+
+                $root = app()->settings->getRootPath();
+
+                $path = $_SERVER['DOCUMENT_ROOT'] . $root . '/public/img/';
+
+                var_dump($path);
+
+                $name = mt_rand(0, 10000) . '_' . $image['name'];
+
+                var_dump($name);
+
+                move_uploaded_file($image['tmp_name'], $path . $name);
+
+                $reader_data = $request->all();
+                $reader_data['image'] = $name;
+
+                if (Reader::create($reader_data)) {
+//                    app()->route->redirect('/');
+                }
+
+            } else {
+                if (Reader::create($request->all())) {
+//                    app()->route->redirect('/');
+                }
+            }
+
+            }
+
+        return new View('site.addReaderForm', ['message' => 'Добавление читателя', ]);
     }
 
     public function addBook(Request $request): string
