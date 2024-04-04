@@ -52,6 +52,7 @@ if (app()->auth::checkAdmin()):
 ?>
 <form method="post" class="form">
     <h2><?= $message ?? ''; ?></h2>
+    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
     <input type="text" name="login" placeholder="Логин">
     <input type="email" name="email" placeholder="Почта">
     <input type="password" name="password" placeholder="Пароль">

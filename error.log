@@ -778,3 +778,8 @@
 [Wed Apr 03 03:59:05.158362 2024] [php:warn] [pid 1952887] [client 10.30.8.22:39600] PHP Warning:  Undefined variable $request in /srv/users/iravtvys/gzxkave-m4/app/Controller/Site.php on line 67
 [Wed Apr 03 03:59:05.158469 2024] [php:warn] [pid 1952887] [client 10.30.8.22:39600] PHP Warning:  Attempt to read property "method" on null in /srv/users/iravtvys/gzxkave-m4/app/Controller/Site.php on line 67
 [Wed Apr 03 04:01:35.000163 2024] [php:warn] [pid 1957335] [client 10.30.8.22:42992] PHP Warning:  Undefined variable $request in /srv/users/iravtvys/gzxkave-m4/app/Controller/Site.php on line 67, referer: http://gzxkave-m4.wsr.ru/addlibrarian
+[Wed Apr 03 21:02:16.774040 2024] [php:error] [pid 2786679] [client 10.30.8.22:36906] PHP Fatal error:  Cannot redeclare Src\\Middleware::runMiddlewares() in /srv/users/iravtvys/gzxkave-m4/core/Src/Middleware.php on line 65
+[Wed Apr 03 21:02:18.146629 2024] [php:error] [pid 2786680] [client 10.30.8.22:36908] PHP Fatal error:  Cannot redeclare Src\\Middleware::runMiddlewares() in /srv/users/iravtvys/gzxkave-m4/core/Src/Middleware.php on line 65
+[Wed Apr 03 21:02:18.597982 2024] [php:error] [pid 2786681] [client 10.30.8.22:36914] PHP Fatal error:  Cannot redeclare Src\\Middleware::runMiddlewares() in /srv/users/iravtvys/gzxkave-m4/core/Src/Middleware.php on line 65
+[Wed Apr 03 21:02:18.786095 2024] [php:error] [pid 2786682] [client 10.30.8.22:36926] PHP Fatal error:  Cannot redeclare Src\\Middleware::runMiddlewares() in /srv/users/iravtvys/gzxkave-m4/core/Src/Middleware.php on line 65
+[Wed Apr 03 21:02:18.970943 2024] [php:error] [pid 2786683] [client 10.30.8.22:36934] PHP Fatal error:  Cannot redeclare Src\\Middleware::runMiddlewares() in /srv/users/iravtvys/gzxkave-m4/core/Src/Middleware.php on line 65

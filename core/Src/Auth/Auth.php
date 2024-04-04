@@ -74,4 +74,12 @@ class Auth
         return false;
     }
 
+    public static function generateCSRF(): string
+    {
+        $token = md5(time());
+        Session::set('csrf_token', $token);
+        return $token;
+    }
+
+
 }

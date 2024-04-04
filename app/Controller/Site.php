@@ -9,7 +9,7 @@ use Src\View;
 use Src\Request;
 use Model\User;
 use Src\Auth\Auth;
-
+use Src\Validator\Validator;
 
 
 class Site
@@ -64,10 +64,28 @@ class Site
 
     public function addlibrarian(Request $request): string
     {
-        if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/');
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'login' => ['required', 'unique:users,login'],
+                'email' => ['required'],
+                'password' => ['required']
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально'
+            ]);
+
+            if($validator->fails()){
+                return new View('site.addLibrarianForm',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
+            if (User::create($request->all())) {
+                app()->route->redirect('/');
+            }
         }
-        return new View('site.addLibrarianForm', ['message' => 'Добавление библиотекаря']);
+        return new View('site.addLibrarianForm');
+
     }
 
     public function addReader(Request $request): string
