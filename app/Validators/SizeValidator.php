@@ -12,6 +12,6 @@ class SizeValidator extends AbstractValidator
     public function rule(): bool
     {
 
-        return !$this->value['error'] = 1;
+        return !$this->value['size'] < 200001;
     }
 }

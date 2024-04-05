@@ -161,7 +161,7 @@ class Site
                 'annotation' => ['required']
             ], [
                 'required' => 'Поле :field пусто',
-                'year' => 'Значение не входит в диапазон (1901-2155)'
+                'year' => 'Значение не 4-х значное или больше 2024'
             ]);
 
             if ($validator->fails()) {
@@ -196,10 +196,25 @@ class Site
                     ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE), 'books' => $books, 'readers' => $readers]);
             }
 
-            if (Bookinstance::create($request->all())) {
-                $selected_book = Book::where('book_name', $request->all()['book_name']);
-                $selected_book->increment('instances_count');
-                app()->route->redirect('/');
+            $book_avaible = 1;
+
+            $book_instances = Bookinstance::all();
+
+            foreach ($book_instances as $book_instance) {
+                if ($book_instance->book_name === $request->all()['book_name']) {
+                    if ($book_instance->in_stock === 0) {
+                        $book_avaible = 0;
+                    }
+                }
+            }
+
+
+            if ($book_avaible === 1) {
+                if (Bookinstance::create($request->all())) {
+                    $selected_book = Book::where('book_name', $request->all()['book_name']);
+                    $selected_book->increment('instances_count');
+                    app()->route->redirect('/');
+                }
             }
 
 

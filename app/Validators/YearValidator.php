@@ -12,6 +12,6 @@ class YearValidator extends AbstractValidator
     public function rule(): bool
     {
 
-        return $this->value > 1900 && $this->value < 2156;
+        return $this->value > 999 && $this->value < 2025;
     }
 }
