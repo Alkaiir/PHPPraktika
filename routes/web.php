@@ -1,8 +1,10 @@
 <?php
 
-use Src\Route;
+use function Route\routing;
 
-Route::add(['GET', 'POST'], '/', [Controller\Site::class, 'index'])->middleware('auth');
+routing(['GET', 'POST'],'/', [Controller\Site::class, 'index'])->add();
+
+//Route::add(['GET', 'POST'], '/', [Controller\Site::class, 'index'])->middleware('auth');
 //Route::add(['GET', 'POST'], '/signup', [Controller\Site::class, 'signup']);
 Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
 Route::add(['GET', 'POST'], '/logout', [Controller\Site::class, 'logout'])->middleware('auth');
