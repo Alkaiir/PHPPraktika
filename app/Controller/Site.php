@@ -160,8 +160,7 @@ class Site
                 'price' => ['required'],
                 'annotation' => ['required']
             ], [
-                'required' => 'Поле :field пусто',
-                'year' => 'Значение не 4-х значное или больше 2024'
+                'required' => 'Поле :field пусто'
             ]);
 
             if ($validator->fails()) {
@@ -187,6 +186,7 @@ class Site
             $validator = new Validator($request->all(), [
                 'pick_date' => ['required'],
                 'return_date' => ['required'],
+                'book_name' => ['bookinstance']
             ], [
                 'required' => 'Поле :field пусто'
             ]);

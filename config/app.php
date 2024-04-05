@@ -15,7 +15,8 @@ return [
         'required' => \Validators\RequireValidator::class,
         'unique' => \Validators\UniqueValidator::class,
         'size' => \Validators\SizeValidator::class,
-        'year' => \Validators\YearValidator::class
+        'year' => \Validators\YearValidator::class,
+        'bookinstance' => \Validators\BookInStockValidator::class
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

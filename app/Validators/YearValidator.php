@@ -7,11 +7,14 @@ use Src\Validator\AbstractValidator;
 class YearValidator extends AbstractValidator
 {
 
-    protected string $message = 'Year :field is not in range (1901 - 2155)';
+    protected string $message = 'Значение :field не 4-х значное или больше текущего года';
 
     public function rule(): bool
     {
 
-        return $this->value > 999 && $this->value < 2025;
+        $time_now = time();
+        $year_now = date('Y',$time_now);
+
+        return $this->value > 999 && $this->value < $year_now;
     }
 }
