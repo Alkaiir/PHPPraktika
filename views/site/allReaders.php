@@ -74,7 +74,7 @@
                     <li>Взятые книги:</li>
                     <?php
                     foreach ($bookinstances as $bookinstance) {
-                        if ($bookinstance->reader_ticket_id === $reader->reader_ticket_id) {
+                        if ($bookinstance->reader_ticket_id === $reader->reader_ticket_id && $bookinstance->in_stock === 0) {
                             ?>
                             <li>============================</li>
                             <li><?=$bookinstance->book_name?></li>

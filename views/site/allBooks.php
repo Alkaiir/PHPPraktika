@@ -7,6 +7,37 @@
         margin-bottom: 20px;
     }
 
+    form {
+        background-color: bisque;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 70px;
+        border-radius: 40px;
+        width: 50%;
+        margin: 20px auto;
+    }
+
+    input {
+        width: 600px;
+        padding: 6px 17px;
+        border-radius: 15px;
+        border: none;
+        font-size: 24px;
+    }
+
+    button {
+        width: 200px;
+        padding: 6px 50px;
+        font-size: 16px;
+        color: black;
+        border: none;
+        border-radius: 15px;
+        background-color: white;
+        cursor: pointer;
+    }
+
     .infoBlock {
         margin: 0 auto;
         width: 50%;
@@ -39,6 +70,12 @@
 
 <h2 class="pageTitle">Список всех книг</h2>
 
+<form action="" method="post">
+    <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
+    <input type="text" name="search">
+    <button>Найти книгу</button>
+</form>
+
 <div class="infoBlock">
     <?php
 
@@ -61,7 +98,7 @@
                     <li>Читатели взявшие книгу:</li>
                     <?php
                     foreach ($bookinstances as $bookinstance) {
-                        if ($bookinstance->book_name === $book->book_name) {
+                        if ($bookinstance->book_name === $book->book_name && $bookinstance->in_stock === 0) {
                             ?>
                             <li>============================</li>
                             <?php

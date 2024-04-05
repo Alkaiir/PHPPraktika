@@ -195,11 +195,32 @@ class Site
         return new View('site.allReaders', ['readers' => $readers, 'bookinstances' => $bookinstances] );
     }
 
-    public function allBooks(): string
+    public function allBooks(Request $request): string
     {
         $books = Book::all();
         $bookinstances = Bookinstance::all();
         $readers = Reader::all();
+
+        if ($request->method === 'POST') {
+
+            $sorted_books = [];
+
+            $search_request = $request->all();
+            foreach ($books as $book) {
+
+                $lower_book_name = $book->book_name;
+                $lower_book_name = mb_strtolower($lower_book_name);
+                $lower_search_request = mb_strtolower($search_request['search']);
+
+                if (str_contains($lower_book_name, $lower_search_request)) {
+                    array_push($sorted_books, $book);
+                }
+                ;
+
+
+            }
+            return new View('site.allBooks', ['books' => $sorted_books, 'bookinstances' => $bookinstances, 'readers' => $readers]);
+        }
 
         return new View('site.allBooks', ['books' => $books, 'bookinstances' => $bookinstances, 'readers' => $readers]);
     }
