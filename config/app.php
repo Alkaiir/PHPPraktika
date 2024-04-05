@@ -13,7 +13,9 @@ return [
     //Валидаторы
     'validators' => [
         'required' => \Validators\RequireValidator::class,
-        'unique' => \Validators\UniqueValidator::class
+        'unique' => \Validators\UniqueValidator::class,
+        'size' => \Validators\SizeValidator::class,
+        'year' => \Validators\YearValidator::class
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

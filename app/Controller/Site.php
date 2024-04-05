@@ -105,9 +105,11 @@ class Site
                 'surname' => ['required'],
                 'adress' => ['required'],
                 'phone' => ['required'],
+                'image' => ['size']
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально'
+                'unique' => 'Поле :field должно быть уникально',
+                'size' => 'Изображение слишком большое'
             ]);
 
             if ($validator->fails()) {
@@ -150,8 +152,27 @@ class Site
 
     public function addBook(Request $request): string
     {
-        if ($request->method === 'POST' && Book::create($request->all())) {
-            app()->route->redirect('/');
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'book_name' => ['required'],
+                'publication_year' => ['required', 'year'],
+                'price' => ['required'],
+                'annotation' => ['required']
+            ], [
+                'required' => 'Поле :field пусто',
+                'year' => 'Значение не входит в диапазон (1901-2155)'
+            ]);
+
+            if ($validator->fails()) {
+                return new View('site.add_book',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
+            if (Book::create($request->all())) {
+                app()->route->redirect('/');
+            }
+
         }
         return new View('site.add_book', ['message' => 'Добавление книги']);
     }
@@ -172,7 +193,7 @@ class Site
 
             if($validator->fails()){
                 return new View('site.add_bookinstance',
-                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE), 'books' => $books, 'readers' => $readers]);
             }
 
             if (Bookinstance::create($request->all())) {
@@ -215,9 +236,6 @@ class Site
                 if (str_contains($lower_book_name, $lower_search_request)) {
                     array_push($sorted_books, $book);
                 }
-                ;
-
-
             }
             return new View('site.allBooks', ['books' => $sorted_books, 'bookinstances' => $bookinstances, 'readers' => $readers]);
         }
