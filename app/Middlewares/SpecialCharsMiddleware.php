@@ -1,7 +1,7 @@
 <?php
 namespace Middlewares;
 
-use Src\Request;
+use Route\Request;
 use function Collect\collection;
 
 class SpecialCharsMiddleware

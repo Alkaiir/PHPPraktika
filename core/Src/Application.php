@@ -7,10 +7,13 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Src\Auth\Auth;
+use Route\Route;
+
 
 class Application
 {
     private Settings $settings;
+
     private Route $route;
     private Capsule $dbManager;
     private Auth $auth;
@@ -19,6 +22,7 @@ class Application
     {
         //Привязываем класс со всеми настройками приложения
         $this->settings = $settings;
+
         //Привязываем класс маршрутизации с установкой префикса
         $this->route = Route::single()->setPrefix($this->settings->getRootPath());
         //Создаем класс менеджера для базы данных

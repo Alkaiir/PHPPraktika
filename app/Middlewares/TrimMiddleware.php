@@ -2,7 +2,7 @@
 
 namespace Middlewares;
 
-use Src\Request;
+use Route\Request;
 
 class TrimMiddleware
 {
